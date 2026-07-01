@@ -5,7 +5,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <meta
@@ -20,11 +20,16 @@
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             margin: 0;
-            padding: 16px;
+            padding: 20px;
 
             min-height: 100vh;
+            min-height: 100dvh;
 
             display: flex;
             justify-content: center;
@@ -35,6 +40,7 @@
                 BlinkMacSystemFont,
                 "Segoe UI",
                 "Microsoft JhengHei",
+                "Noto Sans TC",
                 Arial,
                 sans-serif;
 
@@ -44,9 +50,9 @@
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 560px;
 
-            padding: 30px 25px;
+            padding: 32px 30px;
 
             background-color: #ffffff;
             border-radius: 18px;
@@ -56,15 +62,19 @@
         }
 
         .logo-area {
-            text-align: center;
-            margin-bottom: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            margin-bottom: 22px;
         }
 
         .school-logo {
             display: block;
 
-            width: 220px;
-            max-width: 85%;
+            width: 300px;
+            max-width: 95%;
             height: auto;
 
             margin: 0 auto;
@@ -73,23 +83,23 @@
         }
 
         h1 {
-            margin: 0 0 8px;
+            margin: 0 0 10px;
 
             color: #163a63;
 
-            font-size: 24px;
+            font-size: 25px;
             line-height: 1.45;
             font-weight: 700;
             text-align: center;
         }
 
         .subtitle {
-            margin-bottom: 26px;
+            margin-bottom: 28px;
 
             color: #5f6f81;
 
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
             text-align: center;
         }
 
@@ -100,7 +110,7 @@
         label {
             display: block;
 
-            margin-bottom: 8px;
+            margin-bottom: 9px;
 
             color: #374151;
 
@@ -111,15 +121,15 @@
         input {
             width: 100%;
 
-            padding: 13px 15px;
+            padding: 14px 15px;
 
             border: 1.5px solid #cbd5e1;
             border-radius: 9px;
 
             background-color: #ffffff;
-
             color: #1f2937;
 
+            font-family: inherit;
             font-size: 16px;
 
             transition:
@@ -152,6 +162,7 @@
             background-color: #3182ce;
             color: #ffffff;
 
+            font-family: inherit;
             font-size: 16px;
             font-weight: 700;
 
@@ -166,6 +177,10 @@
             background-color: #286cad;
         }
 
+        button:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
         button:disabled {
             background-color: #9fb3c8;
             cursor: not-allowed;
@@ -174,12 +189,13 @@
         #loading {
             display: none;
 
-            margin: 20px 0 0;
+            margin: 22px 0 0;
 
             color: #526273;
 
             font-size: 15px;
             font-weight: 500;
+            line-height: 1.6;
             text-align: center;
         }
 
@@ -187,7 +203,7 @@
             display: none;
 
             margin-top: 25px;
-            padding: 20px;
+            padding: 22px;
 
             border: 1px solid #dce5ee;
             border-radius: 11px;
@@ -197,21 +213,22 @@
 
         .result-title {
             margin-bottom: 12px;
-            padding-bottom: 12px;
+            padding-bottom: 13px;
 
             border-bottom: 2px solid #3182ce;
 
             color: #25364a;
 
-            font-size: 19px;
+            font-size: 20px;
             font-weight: 700;
+            line-height: 1.5;
             text-align: center;
         }
 
         .semester-tag {
             display: inline-block;
 
-            margin-top: 7px;
+            margin-top: 8px;
             padding: 4px 10px;
 
             border-radius: 5px;
@@ -224,13 +241,13 @@
         }
 
         .score-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+            align-items: start;
 
             gap: 18px;
 
-            padding: 11px 0;
+            padding: 12px 0;
 
             border-bottom: 1px dashed #d6dee8;
         }
@@ -240,29 +257,28 @@
         }
 
         .score-label {
-            flex: 1;
-
             color: #526273;
 
             font-size: 15px;
-            line-height: 1.5;
+            line-height: 1.55;
+
+            overflow-wrap: anywhere;
         }
 
         .score-value {
-            flex: 1;
-
             color: #1f2937;
 
             font-size: 16px;
             font-weight: 700;
-            line-height: 1.5;
+            line-height: 1.55;
             text-align: right;
 
+            overflow-wrap: anywhere;
             word-break: break-word;
         }
 
         .error {
-            padding: 13px;
+            padding: 14px;
 
             border: 1px solid #fecaca;
             border-radius: 8px;
@@ -272,22 +288,22 @@
 
             font-size: 15px;
             font-weight: 700;
-            line-height: 1.6;
+            line-height: 1.65;
             text-align: center;
         }
 
         .notice {
-            margin-top: 20px;
+            margin-top: 22px;
 
             color: #718096;
 
             font-size: 13px;
-            line-height: 1.7;
+            line-height: 1.75;
             text-align: center;
         }
 
         .footer {
-            margin-top: 26px;
+            margin-top: 27px;
 
             color: #9aa8b6;
 
@@ -295,27 +311,95 @@
             text-align: center;
         }
 
-        @media screen and (max-width: 520px) {
+        .hidden {
+            display: none !important;
+        }
+
+        @media screen and (max-width: 600px) {
             body {
-                padding: 10px;
+                padding:
+                    max(12px, env(safe-area-inset-top))
+                    max(10px, env(safe-area-inset-right))
+                    max(12px, env(safe-area-inset-bottom))
+                    max(10px, env(safe-area-inset-left));
+
                 align-items: flex-start;
             }
 
             .container {
-                margin-top: 18px;
-                padding: 25px 18px;
+                margin-top: 12px;
+                padding: 26px 18px;
+
+                border-radius: 16px;
+            }
+
+            .logo-area {
+                margin-bottom: 20px;
             }
 
             .school-logo {
-                width: 210px;
+                width: 285px;
+                max-width: 96%;
             }
 
             h1 {
-                font-size: 21px;
+                font-size: 22px;
+            }
+
+            .subtitle {
+                margin-bottom: 24px;
+                font-size: 14px;
+            }
+
+            input {
+                min-height: 48px;
+            }
+
+            button {
+                min-height: 50px;
+            }
+
+            #result {
+                padding: 18px 16px;
+            }
+
+            .result-title {
+                font-size: 19px;
             }
 
             .score-row {
-                gap: 10px;
+                grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+                gap: 12px;
+            }
+
+            .score-label {
+                font-size: 14px;
+            }
+
+            .score-value {
+                font-size: 15px;
+            }
+        }
+
+        @media screen and (max-width: 380px) {
+            .container {
+                padding: 23px 14px;
+            }
+
+            .school-logo {
+                width: 270px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            #result {
+                padding: 16px 13px;
+            }
+
+            .score-row {
+                gap: 8px;
             }
 
             .score-label,
@@ -333,7 +417,7 @@
         <div class="logo-area">
             <img
                 src="logo.png"
-                alt="台北海洋科技大學 LOGO"
+                alt="台北海洋科技大學標誌"
                 class="school-logo"
             >
         </div>
@@ -342,7 +426,10 @@
             林憶青老師班級成績查詢系統
         </h1>
 
-        <div class="subtitle">
+        <div
+            class="subtitle"
+            id="querySubtitle"
+        >
             請輸入學號查詢目前學期成績
         </div>
 
@@ -360,6 +447,8 @@
                     name="studentId"
                     placeholder="請輸入學號"
                     autocomplete="off"
+                    autocapitalize="characters"
+                    spellcheck="false"
                     maxlength="50"
                     required
                 >
@@ -389,7 +478,10 @@
             aria-atomic="true"
         ></section>
 
-        <div class="notice">
+        <div
+            class="notice"
+            id="notice"
+        >
             本系統僅供班級學生查詢個人成績使用。<br>
             請勿代替他人查詢或轉傳成績資料。
         </div>
@@ -402,7 +494,7 @@
 
     <script>
         /*
-         * 請將下方內容替換為最新的 GAS 網頁應用程式網址。
+         * 請貼上最新部署的 GAS 網頁應用程式網址。
          * 網址必須以 /exec 結尾。
          */
         const GAS_API_URL =
@@ -411,6 +503,9 @@
 
         const queryForm =
             document.getElementById("queryForm");
+
+        const querySubtitle =
+            document.getElementById("querySubtitle");
 
         const studentIdInput =
             document.getElementById("studentId");
@@ -423,6 +518,9 @@
 
         const resultDiv =
             document.getElementById("result");
+
+        const noticeDiv =
+            document.getElementById("notice");
 
 
         queryForm.addEventListener(
@@ -438,6 +536,7 @@
 
             const studentId =
                 studentIdInput.value.trim();
+
 
             if (studentId === "") {
                 alert("請輸入學號！");
@@ -466,6 +565,7 @@
 
             const controller =
                 new AbortController();
+
 
             const timeoutId =
                 window.setTimeout(
@@ -573,9 +673,6 @@
 
         function showScore(responseData) {
 
-            resultDiv.replaceChildren();
-
-
             if (
                 !Array.isArray(
                     responseData.headers
@@ -590,6 +687,17 @@
 
                 return;
             }
+
+
+            /*
+             * 成功查詢後隱藏輸入區域。
+             * 不提供再次查詢按鈕。
+             */
+            queryForm.classList.add("hidden");
+            querySubtitle.classList.add("hidden");
+
+
+            resultDiv.replaceChildren();
 
 
             const titleDiv =
@@ -719,6 +827,21 @@
 
             resultDiv.style.display =
                 "block";
+
+
+            /*
+             * 查詢成功後將畫面捲到成績區。
+             * 手機版使用時較方便。
+             */
+            window.setTimeout(
+                function () {
+                    resultDiv.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                },
+                100
+            );
         }
 
 
