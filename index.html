@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="台北海洋科技大學林憶青老師班級成績查詢系統"
+    >
+
+    <title>林憶青老師班級成績查詢系統</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                "Microsoft JhengHei",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 28px 25px;
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08);
+
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .school-name {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            margin: 0 0 8px;
+            font-size: 24px;
+            line-height: 1.4;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #4a5568;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 15px;
+
+            border: 1.5px solid #cbd5e0;
+            border-radius: 8px;
+
+            font-size: 16px;
+            background-color: #ffffff;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #3182ce;
+            outline: none;
+
+            box-shadow:
+                0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+
+        input:disabled {
+            background-color: #edf2f7;
+            cursor: not-allowed;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+
+            background-color: #3182ce;
+            color: #ffffff;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.2s,
+                opacity 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #2b6cb0;
+        }
+
+        button:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        #loading {
+            display: none;
+
+            text-align: center;
+            color: #4a5568;
+
+            margin: 20px 0 5px;
+            font-weight: 500;
+        }
+
+        .loading-dot {
+            display: inline-block;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        #result {
+            display: none;
+
+            margin-top: 25px;
+            padding: 20px;
+
+            border-radius: 10px;
+
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-title {
+            color: #2d3748;
+            font-size: 19px;
+            font-weight: bold;
+            text-align: center;
+
+            border-bottom: 2px solid #3182ce;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+
+        .semester-tag {
+            display: inline-block;
+
+            background-color: #e2e8f0;
+            color: #4a5568;
+
+            font-size: 13px;
+            font-weight: normal;
+
+            padding: 4px 9px;
+            border-radius: 5px;
+            margin-top: 7px;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 16px;
+
+            padding: 11px 0;
+            border-bottom: 1px dashed #d9e2ec;
+        }
+
+        .score-row:last-child {
+            border-bottom: none;
+        }
+
+        .score-label {
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.5;
+
+            flex: 1;
+        }
+
+        .score-value {
+            color: #2d3748;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.5;
+
+            text-align: right;
+            word-break: break-word;
+
+            flex: 1;
+        }
+
+        .error {
+            color: #c53030;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.6;
+
+            padding: 13px;
+
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+        }
+
+        .notice {
+            margin-top: 18px;
+
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 25px;
+
+            color: #a0aec0;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+
+            .container {
+                margin-top: 20px;
+                padding: 24px 18px;
+            }
+
+            h1 {
+                font-size: 21px;
+            }
+
+            .score-row {
+                gap: 10px;
+            }
+
+            .score-label,
+            .score-value {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="school-name">
+            台北海洋科技大學
+        </div>
+
+        <h1>
+            林憶青老師班級成績查詢系統
+        </h1>
+
+        <div class="subtitle">
+            請輸入學號查詢當期成績
+        </div>
+
+        <form id="queryForm">
+
+            <div class="form-group">
+
+                <label for="studentId">
+                    學號
+                </label>
+
+                <input
+                    type="text"
+                    id="studentId"
+                    name="studentId"
+                    placeholder="請輸入學號"
+                    autocomplete="off"
+                    maxlength="30"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                id="queryButton"
+            >
+                送出查詢
+            </button>
+
+        </form>
+
+        <div
+            id="loading"
+            role="status"
+            aria-live="polite"
+        >
+            正在查詢成績資料
+            <span class="loading-dot">……</span>
+        </div>
+
+        <section
+            id="result"
+            aria-live="polite"
+            aria-atomic="true"
+        ></section>
+
+        <div class="notice">
+            本系統僅供班級學生查詢個人成績使用。<br>
+            請勿代替他人查詢或轉傳成績資料。
+        </div>
+
+        <div class="footer">
+            Grade Inquiry System
+        </div>
+
+    </main>
+
+    <script>
+        /*
+         * GAS 網頁應用程式正式網址。
+         * 必須使用 /exec 結尾的網址。
+         */
+        const GAS_API_URL =
+            "https://script.google.com/macros/s/AKfycbwYkc7KymhRoz2s8_wmlfU5TDVCP3fQp22N-DHyDq2ky6A7JYHpEj6up-FhXruM9S2QRw/exec";
+
+
+        const queryForm =
+            document.getElementById("queryForm");
+
+        const studentIdInput =
+            document.getElementById("studentId");
+
+        const queryButton =
+            document.getElementById("queryButton");
+
+        const loadingDiv =
+            document.getElementById("loading");
+
+        const resultDiv =
+            document.getElementById("result");
+
+
+        queryForm.addEventListener(
+            "submit",
+            function (event) {
+                event.preventDefault();
+                queryScore();
+            }
+        );
+
+
+        async function queryScore() {
+
+            const studentId =
+                studentIdInput.value.trim();
+
+            if (studentId === "") {
+                alert("請輸入學號！");
+                studentIdInput.focus();
+                return;
+            }
+
+            clearResult();
+            setLoading(true);
+
+            /*
+             * 最長等待15秒。
+             * 避免網路異常時畫面一直停留在查詢中。
+             */
+            const controller =
+                new AbortController();
+
+            const timeoutId =
+                window.setTimeout(
+                    function () {
+                        controller.abort();
+                    },
+                    15000
+                );
+
+            try {
+
+                const response =
+                    await fetch(
+                        GAS_API_URL,
+                        {
+                            method: "POST",
+
+                            /*
+                             * 使用 text/plain，
+                             * 可減少跨網域預檢問題。
+                             */
+                            headers: {
+                                "Content-Type":
+                                    "text/plain;charset=utf-8"
+                            },
+
+                            body: JSON.stringify({
+                                id: studentId
+                            }),
+
+                            signal: controller.signal,
+                            redirect: "follow",
+                            cache: "no-store",
+                            referrerPolicy: "no-referrer"
+                        }
+                    );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "HTTP錯誤：" +
+                        response.status
+                    );
+                }
+
+                const responseText =
+                    await response.text();
+
+                let responseData;
+
+                try {
+                    responseData =
+                        JSON.parse(responseText);
+                } catch (jsonError) {
+                    throw new Error(
+                        "伺服器未回傳正確的JSON資料。"
+                    );
+                }
+
+                resultDiv.style.display =
+                    "block";
+
+                if (
+                    responseData.status ===
+                    "success"
+                ) {
+                    showScore(responseData);
+                } else {
+                    showError(
+                        responseData.message ||
+                        "查詢失敗，請稍後再試。"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                if (
+                    error.name ===
+                    "AbortError"
+                ) {
+                    showError(
+                        "連線逾時，請稍後重新查詢。"
+                    );
+                } else {
+                    showError(
+                        "連線失敗，請檢查網路或系統設定。"
+                    );
+                }
+
+            } finally {
+
+                window.clearTimeout(
+                    timeoutId
+                );
+
+                setLoading(false);
+            }
+        }
+
+
+        function showScore(responseData) {
+
+            resultDiv.replaceChildren();
+
+            const titleDiv =
+                document.createElement("div");
+
+            titleDiv.className =
+                "result-title";
+
+
+            const titleText =
+                document.createElement("div");
+
+            titleText.textContent =
+                "當期成績單";
+
+
+            const semesterTag =
+                document.createElement("span");
+
+            semesterTag.className =
+                "semester-tag";
+
+            semesterTag.textContent =
+                "學期：" +
+                String(
+                    responseData.sheetName ||
+                    "-"
+                );
+
+
+            titleDiv.appendChild(
+                titleText
+            );
+
+            titleDiv.appendChild(
+                semesterTag
+            );
+
+            resultDiv.appendChild(
+                titleDiv
+            );
+
+
+            if (
+                !Array.isArray(
+                    responseData.headers
+                ) ||
+                typeof responseData.data
+                    !== "object" ||
+                responseData.data === null
+            ) {
+                showError(
+                    "成績資料格式錯誤。"
+                );
+                return;
+            }
+
+
+            responseData.headers.forEach(
+                function (header) {
+
+                    const key =
+                        String(header).trim();
+
+                    if (key === "") {
+                        return;
+                    }
+
+                    if (
+                        !Object.prototype
+                            .hasOwnProperty.call(
+                                responseData.data,
+                                key
+                            )
+                    ) {
+                        return;
+                    }
+
+
+                    let value =
+                        responseData.data[key];
+
+                    if (
+                        value === "" ||
+                        value === null ||
+                        value === undefined
+                    ) {
+                        value = "-";
+                    }
+
+
+                    const rowDiv =
+                        document.createElement(
+                            "div"
+                        );
+
+                    rowDiv.className =
+                        "score-row";
+
+
+                    const labelSpan =
+                        document.createElement(
+                            "span"
+                        );
+
+                    labelSpan.className =
+                        "score-label";
+
+                    labelSpan.textContent =
+                        key;
+
+
+                    const valueSpan =
+                        document.createElement(
+                            "span"
+                        );
+
+                    valueSpan.className =
+                        "score-value";
+
+                    valueSpan.textContent =
+                        String(value);
+
+
+                    rowDiv.appendChild(
+                        labelSpan
+                    );
+
+                    rowDiv.appendChild(
+                        valueSpan
+                    );
+
+                    resultDiv.appendChild(
+                        rowDiv
+                    );
+                }
+            );
+
+            resultDiv.style.display =
+                "block";
+        }
+
+
+        function showError(message) {
+
+            resultDiv.replaceChildren();
+
+            const errorDiv =
+                document.createElement("div");
+
+            errorDiv.className =
+                "error";
+
+            errorDiv.textContent =
+                "❌ " + String(message);
+
+            resultDiv.appendChild(
+                errorDiv
+            );
+
+            resultDiv.style.display =
+                "block";
+        }
+
+
+        function clearResult() {
+
+            resultDiv.replaceChildren();
+
+            resultDiv.style.display =
+                "none";
+        }
+
+
+        function setLoading(isLoading) {
+
+            loadingDiv.style.display =
+                isLoading
+                    ? "block"
+                    : "none";
+
+            queryButton.disabled =
+                isLoading;
+
+            studentIdInput.disabled =
+                isLoading;
+
+            queryButton.textContent =
+                isLoading
+                    ? "查詢中……"
+                    : "送出查詢";
+        }
+
+    </script>
+
+</body>
+</html>
