@@ -21,58 +21,76 @@
         }
 
         body {
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                "Microsoft JhengHei",
-                Roboto,
-                Arial,
-                sans-serif;
-
-            background-color: #f0f4f8;
             margin: 0;
-            padding: 15px;
+            padding: 16px;
+
+            min-height: 100vh;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            min-height: 100vh;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                "Microsoft JhengHei",
+                Arial,
+                sans-serif;
+
+            background-color: #eef3f8;
+            color: #2d3748;
         }
 
         .container {
-            background: #ffffff;
-            padding: 28px 25px;
-            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+
+            padding: 30px 25px;
+
+            background-color: #ffffff;
+            border-radius: 18px;
 
             box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.08);
-
-            width: 100%;
-            max-width: 480px;
+                0 12px 35px rgba(0, 0, 0, 0.09);
         }
 
-        .school-name {
+        .logo-area {
             text-align: center;
-            color: #718096;
-            font-size: 14px;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
+        }
+
+        .school-logo {
+            display: block;
+
+            width: 220px;
+            max-width: 85%;
+            height: auto;
+
+            margin: 0 auto;
+
+            object-fit: contain;
         }
 
         h1 {
-            text-align: center;
-            color: #1a365d;
             margin: 0 0 8px;
+
+            color: #163a63;
+
             font-size: 24px;
-            line-height: 1.4;
+            line-height: 1.45;
+            font-weight: 700;
+            text-align: center;
         }
 
         .subtitle {
-            text-align: center;
-            color: #4a5568;
+            margin-bottom: 26px;
+
+            color: #5f6f81;
+
             font-size: 15px;
-            margin-bottom: 25px;
+            line-height: 1.6;
+            text-align: center;
         }
 
         .form-group {
@@ -81,21 +99,28 @@
 
         label {
             display: block;
+
             margin-bottom: 8px;
-            color: #4a5568;
+
+            color: #374151;
+
             font-size: 15px;
             font-weight: 600;
         }
 
         input {
             width: 100%;
+
             padding: 13px 15px;
 
-            border: 1.5px solid #cbd5e0;
-            border-radius: 8px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 9px;
+
+            background-color: #ffffff;
+
+            color: #1f2937;
 
             font-size: 16px;
-            background-color: #ffffff;
 
             transition:
                 border-color 0.2s,
@@ -103,11 +128,12 @@
         }
 
         input:focus {
-            border-color: #3182ce;
             outline: none;
 
+            border-color: #3182ce;
+
             box-shadow:
-                0 0 0 3px rgba(66, 153, 225, 0.2);
+                0 0 0 3px rgba(49, 130, 206, 0.16);
         }
 
         input:disabled {
@@ -117,16 +143,17 @@
 
         button {
             width: 100%;
+
             padding: 14px;
+
+            border: none;
+            border-radius: 9px;
 
             background-color: #3182ce;
             color: #ffffff;
 
-            border: none;
-            border-radius: 8px;
-
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
 
             cursor: pointer;
 
@@ -136,38 +163,24 @@
         }
 
         button:hover:not(:disabled) {
-            background-color: #2b6cb0;
+            background-color: #286cad;
         }
 
         button:disabled {
-            background-color: #a0aec0;
+            background-color: #9fb3c8;
             cursor: not-allowed;
         }
 
         #loading {
             display: none;
 
-            text-align: center;
-            color: #4a5568;
+            margin: 20px 0 0;
 
-            margin: 20px 0 5px;
+            color: #526273;
+
+            font-size: 15px;
             font-weight: 500;
-        }
-
-        .loading-dot {
-            display: inline-block;
-            animation: blink 1.2s infinite;
-        }
-
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 0.3;
-            }
-
-            50% {
-                opacity: 1;
-            }
+            text-align: center;
         }
 
         #result {
@@ -176,35 +189,38 @@
             margin-top: 25px;
             padding: 20px;
 
-            border-radius: 10px;
+            border: 1px solid #dce5ee;
+            border-radius: 11px;
 
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
         }
 
         .result-title {
-            color: #2d3748;
-            font-size: 19px;
-            font-weight: bold;
-            text-align: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
 
             border-bottom: 2px solid #3182ce;
-            padding-bottom: 12px;
-            margin-bottom: 12px;
+
+            color: #25364a;
+
+            font-size: 19px;
+            font-weight: 700;
+            text-align: center;
         }
 
         .semester-tag {
             display: inline-block;
 
+            margin-top: 7px;
+            padding: 4px 10px;
+
+            border-radius: 5px;
+
             background-color: #e2e8f0;
-            color: #4a5568;
+            color: #526273;
 
             font-size: 13px;
-            font-weight: normal;
-
-            padding: 4px 9px;
-            border-radius: 5px;
-            margin-top: 7px;
+            font-weight: 400;
         }
 
         .score-row {
@@ -212,10 +228,11 @@
             justify-content: space-between;
             align-items: flex-start;
 
-            gap: 16px;
+            gap: 18px;
 
             padding: 11px 0;
-            border-bottom: 1px dashed #d9e2ec;
+
+            border-bottom: 1px dashed #d6dee8;
         }
 
         .score-row:last-child {
@@ -223,64 +240,74 @@
         }
 
         .score-label {
-            color: #4a5568;
+            flex: 1;
+
+            color: #526273;
+
             font-size: 15px;
             line-height: 1.5;
-
-            flex: 1;
         }
 
         .score-value {
-            color: #2d3748;
+            flex: 1;
+
+            color: #1f2937;
+
             font-size: 16px;
             font-weight: 700;
             line-height: 1.5;
-
             text-align: right;
-            word-break: break-word;
 
-            flex: 1;
+            word-break: break-word;
         }
 
         .error {
-            color: #c53030;
-            text-align: center;
-            font-weight: bold;
-            line-height: 1.6;
-
             padding: 13px;
 
-            background: #fff5f5;
-            border: 1px solid #fed7d7;
+            border: 1px solid #fecaca;
             border-radius: 8px;
+
+            background-color: #fff5f5;
+            color: #c53030;
+
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.6;
+            text-align: center;
         }
 
         .notice {
-            margin-top: 18px;
+            margin-top: 20px;
 
             color: #718096;
+
             font-size: 13px;
             line-height: 1.7;
             text-align: center;
         }
 
         .footer {
-            margin-top: 25px;
+            margin-top: 26px;
 
-            color: #a0aec0;
+            color: #9aa8b6;
+
             font-size: 12px;
             text-align: center;
         }
 
-        @media screen and (max-width: 480px) {
+        @media screen and (max-width: 520px) {
             body {
                 padding: 10px;
                 align-items: flex-start;
             }
 
             .container {
-                margin-top: 20px;
-                padding: 24px 18px;
+                margin-top: 18px;
+                padding: 25px 18px;
+            }
+
+            .school-logo {
+                width: 210px;
             }
 
             h1 {
@@ -303,8 +330,12 @@
 
     <main class="container">
 
-        <div class="school-name">
-            台北海洋科技大學
+        <div class="logo-area">
+            <img
+                src="logo.png"
+                alt="台北海洋科技大學 LOGO"
+                class="school-logo"
+            >
         </div>
 
         <h1>
@@ -312,7 +343,7 @@
         </h1>
 
         <div class="subtitle">
-            請輸入學號查詢當期成績
+            請輸入學號查詢目前學期成績
         </div>
 
         <form id="queryForm">
@@ -329,7 +360,7 @@
                     name="studentId"
                     placeholder="請輸入學號"
                     autocomplete="off"
-                    maxlength="30"
+                    maxlength="50"
                     required
                 >
 
@@ -349,8 +380,7 @@
             role="status"
             aria-live="polite"
         >
-            正在查詢成績資料
-            <span class="loading-dot">……</span>
+            正在查詢成績資料……
         </div>
 
         <section
@@ -372,8 +402,8 @@
 
     <script>
         /*
-         * GAS 網頁應用程式正式網址。
-         * 必須使用 /exec 結尾的網址。
+         * 請將下方內容替換為最新的 GAS 網頁應用程式網址。
+         * 網址必須以 /exec 結尾。
          */
         const GAS_API_URL =
             "https://script.google.com/macros/s/AKfycbwYYa3UQoBP-p3dyluLdUDfsZGBqL7K6E7RlODNUZTD8WmL8PmoIPr0CxghF8xSjVXI/exec";
@@ -415,13 +445,25 @@
                 return;
             }
 
+
+            if (
+                !GAS_API_URL.startsWith(
+                    "https://script.google.com/macros/s/"
+                ) ||
+                !GAS_API_URL.endsWith("/exec")
+            ) {
+                showError(
+                    "尚未設定正確的 GAS 網頁應用程式網址。"
+                );
+
+                return;
+            }
+
+
             clearResult();
             setLoading(true);
 
-            /*
-             * 最長等待15秒。
-             * 避免網路異常時畫面一直停留在查詢中。
-             */
+
             const controller =
                 new AbortController();
 
@@ -433,6 +475,7 @@
                     15000
                 );
 
+
             try {
 
                 const response =
@@ -441,10 +484,6 @@
                         {
                             method: "POST",
 
-                            /*
-                             * 使用 text/plain，
-                             * 可減少跨網域預檢問題。
-                             */
                             headers: {
                                 "Content-Type":
                                     "text/plain;charset=utf-8"
@@ -455,35 +494,41 @@
                             }),
 
                             signal: controller.signal,
+
                             redirect: "follow",
+
                             cache: "no-store",
-                            referrerPolicy: "no-referrer"
+
+                            referrerPolicy:
+                                "no-referrer"
                         }
                     );
 
+
                 if (!response.ok) {
                     throw new Error(
-                        "HTTP錯誤：" +
+                        "HTTP 錯誤：" +
                         response.status
                     );
                 }
 
+
                 const responseText =
                     await response.text();
 
+
                 let responseData;
+
 
                 try {
                     responseData =
                         JSON.parse(responseText);
                 } catch (jsonError) {
                     throw new Error(
-                        "伺服器未回傳正確的JSON資料。"
+                        "伺服器未回傳正確的 JSON。"
                     );
                 }
 
-                resultDiv.style.display =
-                    "block";
 
                 if (
                     responseData.status ===
@@ -500,6 +545,7 @@
             } catch (error) {
 
                 console.error(error);
+
 
                 if (
                     error.name ===
@@ -528,6 +574,23 @@
         function showScore(responseData) {
 
             resultDiv.replaceChildren();
+
+
+            if (
+                !Array.isArray(
+                    responseData.headers
+                ) ||
+                typeof responseData.data
+                    !== "object" ||
+                responseData.data === null
+            ) {
+                showError(
+                    "系統回傳的成績資料格式錯誤。"
+                );
+
+                return;
+            }
+
 
             const titleDiv =
                 document.createElement("div");
@@ -570,30 +633,17 @@
             );
 
 
-            if (
-                !Array.isArray(
-                    responseData.headers
-                ) ||
-                typeof responseData.data
-                    !== "object" ||
-                responseData.data === null
-            ) {
-                showError(
-                    "成績資料格式錯誤。"
-                );
-                return;
-            }
-
-
             responseData.headers.forEach(
                 function (header) {
 
                     const key =
                         String(header).trim();
 
+
                     if (key === "") {
                         return;
                     }
+
 
                     if (
                         !Object.prototype
@@ -608,6 +658,7 @@
 
                     let value =
                         responseData.data[key];
+
 
                     if (
                         value === "" ||
@@ -665,6 +716,7 @@
                 }
             );
 
+
             resultDiv.style.display =
                 "block";
         }
@@ -674,6 +726,7 @@
 
             resultDiv.replaceChildren();
 
+
             const errorDiv =
                 document.createElement("div");
 
@@ -682,6 +735,7 @@
 
             errorDiv.textContent =
                 "❌ " + String(message);
+
 
             resultDiv.appendChild(
                 errorDiv
@@ -708,18 +762,20 @@
                     ? "block"
                     : "none";
 
+
             queryButton.disabled =
                 isLoading;
 
+
             studentIdInput.disabled =
                 isLoading;
+
 
             queryButton.textContent =
                 isLoading
                     ? "查詢中……"
                     : "送出查詢";
         }
-
     </script>
 
 </body>
